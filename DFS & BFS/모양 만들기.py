@@ -9,51 +9,55 @@ N, M = map(int, input().split())
 arr = [list(map(int, input().split())) for _ in range(N)]
 visited = {}
 shapes = {}
-points = []
+points = [0]
+zero = []
 
-def DFS(x, y, idx):
-    visited[(x, y)] = 1
-    shapes[(x, y)] = idx
-    points[idx] += 1
+def BFS(x, y, idx):
+    dq = deque()
+    dq.append((x, y))
+    visited[(x, y)] = True
 
-    for d in range(4):
-        nx = x + dx[d]
-        ny = y + dy[d]
-        if nx < 0 or nx >= N or ny < 0 or ny >= M:
-            continue
-        if visited.get((nx, ny)):
-            continue
-        if arr[nx][ny] == 1:
-            DFS(nx, ny, idx)
+    while dq:
+        x, y = dq.popleft()
+        arr[x][y] = idx
+        points[idx] += 1
+        for d in range(4):
+            nx = x + dx[d]
+            ny = y + dy[d]
+            if nx < 0 or nx >= N or ny < 0 or ny >= M:
+                continue
+            if visited.get((nx, ny)):
+                continue
+            visited[(nx, ny)] = True
+            if arr[nx][ny] == 1:
+                dq.append((nx, ny))
 
-idx = 0
+idx = 1
 for i in range(N):
     for j in range(M):
+        if arr[i][j] == 0:
+            zero.append((i, j))
         if visited.get((i, j)) is None and arr[i][j] == 1:
             points.append(0)
-            DFS(i, j, idx)
+            BFS(i, j, idx)
             idx += 1
 
 answer = 0 
+check = {}
 
-for i in range(N):
-    for j in range(M):
-        if arr[i][j] != 0:
-            continue
+for x, y in zero: 
+        check.clear()
         point = 0
-        check = {}
         for d in range(4):
-            nx = i + dx[d]
-            ny = j + dy[d]
+            nx = x + dx[d]
+            ny = y + dy[d]
             if nx < 0 or nx >= N or ny < 0 or ny >= M:
                 continue
-            if shapes.get((nx, ny)) is not None:
-                idx = shapes.get((nx, ny))
-                if check.get(idx) is None:
-                    check[idx] = True
-                    point += points[idx]
-        point += 1
+            if arr[nx][ny] > 0 and check.get(arr[nx][ny]) is None:
+                idx = arr[nx][ny]
+                check[idx] = True
+                point += points[idx]
         if point > answer:
             answer = point
 
-print(answer)
+print(answer + 1)
