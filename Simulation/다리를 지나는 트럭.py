@@ -29,5 +29,5 @@ def solution(bridge_length, weight, truck_weights):
         t, w = crossing.popleft()
         max_t = max(t, max_t)
     
-    time +=  time - max_t + bridge_length
+    time += time - max_t + bridge_length
     return time
