@@ -5,7 +5,7 @@ def dfs(cur, tickets, visit, answer):
             answer.append(route[1])
             answer = dfs(route[1], tickets, visit, answer)
             if len(answer) == len(tickets) + 1:     
-                return answer
+                break
             answer.pop(-1)
             visit[i] = False
     return answer
