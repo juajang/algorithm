@@ -8,12 +8,12 @@ R, C = map(int, input().split())
 arr = [list(input()) for _ in range(R)]
 
 x, y = 0, 0
-queue = set()
-queue.add((x, y, arr[0][0]))
+queue = deque()
+queue.append((x, y, arr[0][0]))
 answer = 1
 
 while queue:
-    x, y, alpha = queue.pop()
+    x, y, alpha = queue.popleft()
     answer = max(answer, len(alpha))
     for i in range(4):
         nx = x + d[i][0]
@@ -22,6 +22,6 @@ while queue:
             continue
         if arr[nx][ny] in alpha: 
             continue
-        queue.add((nx, ny, alpha + arr[nx][ny]))
+        queue.append((nx, ny, alpha + arr[nx][ny]))
 
 print(answer)
