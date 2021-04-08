@@ -10,7 +10,4 @@ for weight in w:
     else:
         break
 
-if total == 0:
-    print(1)
-else:
-    print(answer)
+print(total + 1)
