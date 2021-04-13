@@ -22,7 +22,7 @@ def find(x, y, directions):
                 ny += dy[d]
                 if nx < 0 or nx >= N or ny < 0 or ny >= M:
                     break
-                if board[nx][ny] == 6:
+                 if board[nx][ny] == 6:
                     break
                 if board[nx][ny] == 0:
                     temp.add((nx, ny))
@@ -39,7 +39,7 @@ for i in range(N):
         elif board[i][j] == 0:
             count += 1
 
-if len(result) == 0:
+if len(results) == 0:
     print(count)
     
 else:
