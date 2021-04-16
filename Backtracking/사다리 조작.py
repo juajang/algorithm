@@ -1,4 +1,3 @@
-from itertools import combinations
 import sys
 input = sys.stdin.readline
 
@@ -22,7 +21,7 @@ def check():
             return False
     return True    
 
-def backtracking(count):
+def backtracking(count, idx):
     global answer
     if count >= answer:
         return
@@ -30,12 +29,12 @@ def backtracking(count):
         answer = count
         return
     for i in range(1, N):
-        for j in range(1, H+1):
+        for j in range(idx, H+1):
             if ladders[i][j] == 0 and ladders[i-1][j] == 0 and ladders[i+1][j] == 0:
                 ladders[i][j] = 1
-                backtracking(count + 1)
+                backtracking(count + 1, j)
                 ladders[i][j] = 0
 
 answer = 4
-backtracking(0)
+backtracking(0, 1)
 print(answer if answer < 4 else -1)
