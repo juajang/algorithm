@@ -1,6 +1,7 @@
 import sys
 from copy import deepcopy
 from itertools import permutations
+
 INF = float('inf')
 input = sys.stdin.readline
 
