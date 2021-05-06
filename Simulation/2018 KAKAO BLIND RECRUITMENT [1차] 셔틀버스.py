@@ -46,4 +46,3 @@ def solution(n, t, m, timetable):
     answer += ':'
     answer += '0' + str(con_mm) if con_mm < 10 else str(con_mm)
     return answer
-    

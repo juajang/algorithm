@@ -27,4 +27,3 @@ def solution(N, number):
         dp.append(all_case) 
         
     return answer
-    
