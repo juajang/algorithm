@@ -11,28 +11,22 @@ def solution(rows, columns, queries):
             idx += 1
 
     for x1, y1, x2, y2 in queries:
-        curr = []
+        changes = []
         x, y = x1, y1
         prev = arr[x][y]
         while True:
-            print(x, y)
             if x == x1 and y < y2:
                 y += 1
             elif x < x2 and y == y2:
                 x += 1
-            elif x == x2 and y > y2:
+            elif x == x2 and y > y1:
                 y -= 1
             elif x > x1 and y == y1:
                 x -= 1
+            changes.append(prev)
             arr[x][y], prev = prev, arr[x][y]
             if x == x1 and y == y1:
                 break
-                
-        for i in arr:
-            for n in i:
-                print("%02d "%n, end=' ')
-            print()
-        print()
+        answer.append(min(changes))
+        
     return answer
-
-solution(6, 6, [[2,2,5,4],[3,3,6,6],[5,1,6,3]])
