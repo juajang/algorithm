@@ -16,3 +16,4 @@ def solution(n, works):
             answer += tmp * tmp
             
     return answer
+    
